@@ -1,0 +1,19 @@
+footer {
+    color: #0000004D;
+    border-top: 1px solid #0000004D;
+    text-align: center;
+}
+
+footer > h1 {
+    font-weight: 900;
+    font-size: 32px;
+    font-style: normal;
+    line-height: 39px;
+}
+
+footer > p {
+    font-weight: 400;
+    font-size: 14px;
+    font-style: normal;
+    line-height: 17px;
+}

@@ -1,0 +1,15 @@
+.todo-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.todo-item > h2{
+    padding-left: 24px;
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 25px;
+    letter-spacing: 0;
+    text-align: left;
+
+}
