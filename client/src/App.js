@@ -1,14 +1,10 @@
 import "./App.css";
-import TodoList from "./pages/TodoList";
-import Navbar from "./components/Navbar";
-import { Footer } from "./components";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <div className="App">
-      <Navbar user={"Vedran"} />
-      <TodoList />
-      <Footer />
+      <Home />
     </div>
   );
 }

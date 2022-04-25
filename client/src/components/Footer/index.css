@@ -1,7 +1,6 @@
 footer {
     color: #0000004D;
     border-top: 1px solid #0000004D;
-    text-align: center;
 }
 
 footer > h1 {
@@ -9,6 +8,7 @@ footer > h1 {
     font-size: 32px;
     font-style: normal;
     line-height: 39px;
+    text-align: center;
 }
 
 footer > p {
@@ -16,4 +16,5 @@ footer > p {
     font-size: 14px;
     font-style: normal;
     line-height: 17px;
+    text-align: center;
 }

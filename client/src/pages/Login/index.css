@@ -1,0 +1,31 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    border-radius: 25px;
+    background: #E5E5E5;
+    padding: 2rem;
+}
+
+.login > .login-field {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.login > .login-field > input {
+    width: auto;
+    height: 56px;
+    border-radius: 4px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+}
+
+.login > .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
