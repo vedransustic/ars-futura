@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Title } from "../../components";
 import "./index.css";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -37,6 +38,9 @@ const Login = () => {
       </label>
       <div className="buttons">
         <Button text="Register" />
+        <Link to="/login">
+          <Button text="Back to Login" />
+        </Link>
       </div>
     </form>
   );

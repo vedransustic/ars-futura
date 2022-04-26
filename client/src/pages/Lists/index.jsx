@@ -2,8 +2,9 @@ import React from "react";
 import "./index.css";
 import { Button, Footer, ListItem, Navbar, Title } from "../../components";
 import { DUMMY_USER } from "../../const";
+import { Link } from "react-router-dom";
 
-const Home = () => {
+const Lists = () => {
   const deleteListItem = (title) => {
     console.log(title);
   };
@@ -13,7 +14,9 @@ const Home = () => {
       <Navbar user={DUMMY_USER.name} />
       <div className="title-button">
         <Title text={"User Lists"} />
-        <Button text={"Create New List"} />
+        <Link to="/login">
+          <Button text={"Create New List"} />
+        </Link>
       </div>
       <div className="user-lists">
         {DUMMY_USER.todoLists.map((list, idx) => (
@@ -29,4 +32,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Lists;

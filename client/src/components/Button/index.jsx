@@ -3,7 +3,7 @@ import "./index.css";
 
 const NewListButton = ({ text }) => {
   return (
-    <button className="new-list">
+    <button className="button">
       <span className="button-text">{text}</span>
     </button>
   );
