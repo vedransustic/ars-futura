@@ -2,7 +2,7 @@ import React from "react";
 import "./index.css";
 import Logo from "../Logo";
 
-const Navbar = ({ user }) => {
+const Navbar = ({ user = "GUEST" }) => {
   return (
     <nav>
       <Logo />

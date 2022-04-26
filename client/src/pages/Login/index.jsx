@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Title } from "../../components";
 import "./index.css";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -28,7 +29,10 @@ const Login = () => {
       </div>
       <div className="buttons">
         <Button text="Login" />
-        <Button text="Register" />
+        <div className="or">- or -</div>
+        <Link to="/register">
+          <Button text="Register" />
+        </Link>
       </div>
     </form>
   );

@@ -1,4 +1,4 @@
-.new-list {
+.button {
     background: linear-gradient(#FFD976, #F8BE26);
     box-shadow: 0 1px 2px 0 #00000033;
     display: flex;
@@ -13,7 +13,7 @@
     height: 43px;
 }
 
-.new-list > .button-text{
+.button > .button-text{
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
