@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     margin: auto;
+    min-height: 60vh;
 }
 
 .top {
@@ -63,8 +64,12 @@
 
 .middle > .plus {
     flex: 1;
-    padding-left: 22px;
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: #00000040;
+    cursor: pointer;
 }
 
 .middle > input {
@@ -73,10 +78,13 @@
     height: inherit;
     background-color: transparent;
     border: none;
+
     font-size: 21px;
     font-weight: 400;
     line-height: 25px;
     letter-spacing: 0;
+
+    padding-left: 2rem;
     text-align: left;
     color: #00000040;
 }

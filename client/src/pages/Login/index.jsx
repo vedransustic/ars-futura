@@ -1,13 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Button, Title } from "../../components";
 import "./index.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LOGIN_URL, PASSWORD_REGEX, USERNAME_REGEX } from "../../const";
 import axios from "../../api/axios";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/actions/userActions";
 
 const Login = () => {
   const usernameRef = useRef(null);
   const errRef = useRef(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -37,10 +41,16 @@ const Login = () => {
           withCredentials: true,
         }
       );
-      console.log(JSON.stringify(response));
+
+      if (response) {
+        const { _id, username, todoLists } = response.data.user;
+
+        dispatch(login(_id, username, todoLists));
+
+        navigate("/lists");
+      }
       setUsername("");
       setPassword("");
-      //redirect to... i pospremi data u spremiste ili nest.
     } catch (error) {
       if (!error?.response) {
         setErrorMessage("No Server Response");
