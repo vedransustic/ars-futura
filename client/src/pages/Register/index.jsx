@@ -1,49 +1,316 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button, Title } from "../../components";
 import "./index.css";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  USERNAME_REGEX,
+  PASSWORD_REGEX,
+  EMAIL_REGEX,
+  REGISTER_URL,
+} from "../../const";
+import {
+  faCheck,
+  faInfoCircle,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
+import axios from "../../api/axios";
 
-const Login = () => {
+const Register = () => {
+  const usernameRef = useRef(null);
+  const errRef = useRef(null);
+
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [validUsername, setValidUsername] = useState(false);
+  const [usernameFocus, setUsernameFocus] = useState(false);
 
-  console.log(username, " => ", password, " => ", email);
+  const [password, setPassword] = useState("");
+  const [validPassword, setValidPassword] = useState(false);
+  const [passwordFocus, setPasswordFocus] = useState(false);
+
+  const [conformPassword, setConformPassword] = useState("");
+  const [validConformPassword, setValidConformPassword] = useState(false);
+  const [conformPasswordFocus, setConformPasswordFocus] = useState(false);
+
+  const [email, setEmail] = useState("");
+  const [validEmail, setValidEmail] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false);
+
+  const [errorMessage, setErrorMessage] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    usernameRef.current.focus();
+  }, []);
+
+  useEffect(() => {
+    const result = USERNAME_REGEX.test(username);
+    setValidUsername(result);
+  }, [username]);
+
+  useEffect(() => {
+    const result = PASSWORD_REGEX.test(password);
+    setValidPassword(result);
+    const match = password === conformPassword;
+    setValidConformPassword(match);
+  }, [password, conformPassword]);
+
+  useEffect(() => {
+    const result = EMAIL_REGEX.test(email);
+    setValidEmail(result);
+  }, [email]);
+
+  useEffect(() => {
+    setErrorMessage("");
+  }, [username, password, conformPassword, email]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const v1 = USERNAME_REGEX.test(username);
+    const v2 = PASSWORD_REGEX.test(password);
+    if (!v1 || !v2) {
+      setErrorMessage("Error: Invalid entry");
+      return;
+    }
+    try {
+      const response = await axios.post(
+        REGISTER_URL,
+        JSON.stringify({ username, password, email }),
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+
+      setSuccess(true);
+    } catch (error) {
+      if (!error?.response) {
+        setErrorMessage("No Server Response");
+      } else if (error.response?.status === 408) {
+        setErrorMessage("Username Taken");
+      } else if (error.response?.status === 409) {
+        setErrorMessage("Email Already in Use");
+      } else {
+        setErrorMessage("Registration Failed");
+      }
+      errRef.current.focus();
+    }
+  };
+
   return (
-    <form className="register">
-      <Title text="REGISTER" />
-      <label className="login-field">
-        <h2>Username:</h2>
-        <input
-          type="text"
-          name="username"
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </label>
-      <label className="login-field">
-        <h2>Password:</h2>
-        <input
-          type="password"
-          name="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </label>
-      <label className="login-field">
-        <h2>Email:</h2>
-        <input
-          type="email"
-          name="email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </label>
-      <div className="buttons">
-        <Button text="Register" />
-        <Link to="/login">
-          <Button text="Back to Login" />
-        </Link>
-      </div>
-    </form>
+    <>
+      {success ? (
+        <section>
+          <h1>Success!</h1>
+          <p>
+            <Link to="/login">Sign in</Link>
+          </p>
+        </section>
+      ) : (
+        <section className="register">
+          <p
+            ref={errRef}
+            className={errorMessage ? "error-message" : "offscreen"}
+            aria-live="assertive"
+          >
+            {errorMessage}
+          </p>
+          <Title text="REGISTER" />
+          <form onSubmit={handleSubmit}>
+            <>
+              <label htmlFor="username" className="login-field">
+                Username:
+                <span className={validUsername ? "valid" : "hide"}>
+                  <FontAwesomeIcon icon={faCheck} />
+                </span>
+                <span
+                  className={validUsername || !username ? "hide" : "invalid"}
+                >
+                  <FontAwesomeIcon icon={faTimes} />
+                </span>
+              </label>
+
+              <input
+                type="text"
+                id="username"
+                ref={usernameRef}
+                autoComplete="off"
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                aria-invalid={validUsername ? "false" : "true"}
+                aria-describedby="username-note"
+                onFocus={() => setUsernameFocus(true)}
+                onBlur={() => setUsernameFocus(false)}
+              />
+              <p
+                id="username-note"
+                className={
+                  username && usernameFocus && !validUsername
+                    ? "instructions"
+                    : "offscreen"
+                }
+              >
+                <FontAwesomeIcon icon={faInfoCircle} />
+                Username must be 4 to 24 characters long.
+                <br />
+                Must begin with letter.
+                <br />
+                Letters, numbers, underscores, hyphens allowed.
+                <br />
+              </p>
+            </>
+
+            <>
+              <label htmlFor="password" className="login-field">
+                Password:
+                <span className={validPassword ? "valid" : "hide"}>
+                  <FontAwesomeIcon icon={faCheck} />
+                </span>
+                <span
+                  className={validPassword || !password ? "hide" : "invalid"}
+                >
+                  <FontAwesomeIcon icon={faTimes} />
+                </span>
+              </label>
+
+              <input
+                type="password"
+                id="password"
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                aria-invalid={validUsername ? "false" : "true"}
+                aria-describedby="password-note"
+                onFocus={() => setPasswordFocus(true)}
+                onBlur={() => setPasswordFocus(false)}
+              />
+              <p
+                id="password-note"
+                className={
+                  password && passwordFocus && !validPassword
+                    ? "instructions"
+                    : "offscreen"
+                }
+              >
+                <FontAwesomeIcon icon={faInfoCircle} />
+                Password must be 8 to 24 characters long.
+                <br />
+                Must include uppercase, lowercase, number, special character.
+                <br />
+                This includes: <span aria-label={"exclamation mark"}>
+                  !
+                </span>{" "}
+                <span aria-label={"at symbol"}>@</span>{" "}
+                <span aria-label={"hashtag"}>#</span>{" "}
+                <span aria-label={"dollar sign"}>$</span>{" "}
+                <span aria-label={"percentage"}>%</span>
+                <br />
+              </p>
+            </>
+
+            <>
+              <label htmlFor="conform-password" className="login-field">
+                Conform Password:
+                <span
+                  className={
+                    validConformPassword && conformPassword ? "valid" : "hide"
+                  }
+                >
+                  <FontAwesomeIcon icon={faCheck} />
+                </span>
+                <span
+                  className={
+                    validConformPassword || !conformPassword
+                      ? "hide"
+                      : "invalid"
+                  }
+                >
+                  <FontAwesomeIcon icon={faTimes} />
+                </span>
+              </label>
+
+              <input
+                type="password"
+                id="conform-password"
+                onChange={(e) => setConformPassword(e.target.value)}
+                required
+                aria-invalid={validConformPassword ? "false" : "true"}
+                aria-describedby="conform-password-note"
+                onFocus={() => setConformPasswordFocus(true)}
+                onBlur={() => setConformPasswordFocus(false)}
+              />
+              <p
+                id="conform-password-note"
+                className={
+                  conformPassword &&
+                  conformPasswordFocus &&
+                  !validConformPassword
+                    ? "instructions"
+                    : "offscreen"
+                }
+              >
+                <FontAwesomeIcon icon={faInfoCircle} />
+                Both Passwords must match.
+              </p>
+            </>
+
+            <>
+              <label htmlFor="email" className="login-field">
+                Email:
+                <span className={validEmail ? "valid" : "hide"}>
+                  <FontAwesomeIcon icon={faCheck} />
+                </span>
+                <span className={validEmail || !email ? "hide" : "invalid"}>
+                  <FontAwesomeIcon icon={faTimes} />
+                </span>
+              </label>
+
+              <input
+                type="email"
+                id="email"
+                autoComplete="off"
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                aria-invalid={validEmail ? "false" : "true"}
+                aria-describedby="email-note"
+                onFocus={() => setEmailFocus(true)}
+                onBlur={() => setEmailFocus(false)}
+              />
+              <p
+                id="email-note"
+                className={
+                  email && emailFocus && !validEmail
+                    ? "instructions"
+                    : "offscreen"
+                }
+              >
+                <FontAwesomeIcon icon={faInfoCircle} />
+                Email consists of [username]@[domain name].[domain].
+                <br />
+                For example: jon_doe@google.com
+              </p>
+            </>
+
+            <Button
+              text="Sign Up"
+              disable={
+                !validUsername ||
+                !validPassword ||
+                !validConformPassword ||
+                !validEmail
+              }
+            />
+          </form>
+          <div className="sign-in">
+            <p>Already have an account?</p>
+            <Link to="/login">
+              <div className="link">Sign in</div>
+            </Link>
+          </div>
+        </section>
+      )}
+    </>
   );
 };
 
-export default Login;
+export default Register;

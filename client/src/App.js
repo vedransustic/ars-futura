@@ -13,10 +13,10 @@ function App() {
       <Routes>
         <Route index path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
-        <Route path="/" element={<Layout />}>
-          <Route path="list" element={<Lists />}>
-            <Route path=":listId" element={<TodoList />} />
-          </Route>
+        <Route element={<Layout />}>
+          <Route path="lists" element={<Lists />} />
+          <Route path="lists/:listId" element={<TodoList />} />
+          <Route path="newList" element={<TodoList />} />
           <Route path="*" element={<Error />} />
         </Route>
       </Routes>

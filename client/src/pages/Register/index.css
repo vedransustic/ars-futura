@@ -1,31 +1,90 @@
 .register {
+    min-height: 900px;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     border-radius: 25px;
     background: #E5E5E5;
     padding: 2rem;
 }
 
-.register > .login-field {
-    width: auto;
+.register > form {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    flex-grow: 1;
+    padding-bottom: 1rem;
+    margin-top: 1rem;
 }
 
-.register > .login-field > input {
+.register > form > input,
+.register > form > Button {
     width: auto;
     height: 56px;
-    border-radius: 4px;
-
+    border-radius: .5rem;
+    padding: 0.25rem;
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
     line-height: 32px;
+    margin-top: 1rem;
+}
+.register > form > Button{
+    justify-content: center;
+    margin-top: 1rem;
 }
 
-.register > .buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
+.register > form > label {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.instructions {
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    background: #000;
+    color: #fff;
+    padding: 0.25rem;
+    position: relative;
+    bottom: -10px;
+}
+
+.register > form > .instructions > svg {
+    margin-right: 0.25rem;
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.hide {
+    display: none;
+}
+
+.valid {
+    color: limegreen;
+    margin-left: 0.25rem;
+}
+
+.invalid {
+    color: red;
+    margin-left: 0.25rem;
+}
+
+.error-message {
+    background-color: lightpink;
+    color: firebrick;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.sign-in{
+    text-align: right;
+}
+.link {
+    font-size: 1.25rem;
+    text-decoration: underline;
+
 }
