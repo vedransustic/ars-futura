@@ -1,12 +1,22 @@
 import React, { useState } from "react";
 import "./index.css";
 import { Button, Title, TodoItem } from "../../components";
-import { Pencil, Plus } from "../../Icons";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "../../api/axios";
-import { ADD_TODO_ITEM_URL, RENAME_LIST_URL } from "../../const";
+import {
+  TODO_ITEM_PLACEHOLDER,
+  TODO_LIST_BACK_BUTTON,
+  TODO_LIST_SHARE,
+} from "../../const";
+import {
+  ADD_TODO_ITEM_URL,
+  APP_LISTS_URL,
+  RENAME_LIST_URL,
+} from "../../const/routes";
 import { addTodoItem, changeListTitle } from "../../redux/actions/userActions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 const TodoList = () => {
   const { listId } = useParams();
@@ -20,7 +30,6 @@ const TodoList = () => {
 
   const [title, setTitle] = useState(displayData?.todoTitle);
   const [edit, setEdit] = useState(false);
-
   const [newTodo, setNewTodo] = useState("");
 
   const handleEdit = () => {
@@ -33,22 +42,17 @@ const TodoList = () => {
 
   const submitEdit = async () => {
     try {
-      const response = await axios.post(
-        RENAME_LIST_URL,
-        JSON.stringify({
+      await axios
+        .put(RENAME_LIST_URL, {
           id,
           lid: displayData.lid,
           newTitle: title,
-        }),
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
-
-      if (response.status === 200) {
-        dispatch(changeListTitle(displayData.lid, title));
-      }
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            dispatch(changeListTitle(displayData.lid, title));
+          }
+        });
       setEdit(false);
     } catch (error) {
       console.error("ERROR: ", error);
@@ -61,22 +65,25 @@ const TodoList = () => {
 
   const submitNewTodo = async () => {
     try {
-      const response = await axios.post(
-        ADD_TODO_ITEM_URL,
-        JSON.stringify({
-          id: id,
-          lid: displayData.lid,
-          title: newTodo,
-        }),
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
-      if (response.status === 200) {
-        dispatch(addTodoItem(displayData.lid, response.data.id, newTodo));
-        setNewTodo("");
-      }
+      await axios
+        .post(
+          ADD_TODO_ITEM_URL,
+          JSON.stringify({
+            id: id,
+            lid: displayData.lid,
+            title: newTodo,
+          }),
+          {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+          }
+        )
+        .then((response) => {
+          if (response.status === 200) {
+            dispatch(addTodoItem(displayData.lid, response.data.id, newTodo));
+            setNewTodo("");
+          }
+        });
     } catch (error) {
       console.error("ERROR: ", error);
     }
@@ -93,20 +100,21 @@ const TodoList = () => {
               <Title text={title} />
             )}
             <button onClick={edit ? submitEdit : handleEdit}>
-              <Pencil /> <span>Edit</span>
+              <FontAwesomeIcon icon={faPen} size={"2x"} /> <span>Edit</span>
             </button>
           </div>
-          <Link to={"/lists"}>
-            <Button text={"Back to List"} />
+          <Link to={APP_LISTS_URL}>
+            <Button text={TODO_LIST_BACK_BUTTON} />
           </Link>
         </div>
         <div className="middle">
           <span className="plus" onClick={submitNewTodo}>
-            <Plus />
+            <FontAwesomeIcon icon={faPlusCircle} size={"2x"} />
           </span>
           <input
             type="text"
-            placeholder="Add a to-do..."
+            value={newTodo}
+            placeholder={TODO_ITEM_PLACEHOLDER}
             onChange={handleInputTodo}
           />
         </div>
@@ -121,6 +129,7 @@ const TodoList = () => {
           ))}
         </div>
       </div>
+      <Button text={TODO_LIST_SHARE} onClick={() => {}} />
     </>
   );
 };
