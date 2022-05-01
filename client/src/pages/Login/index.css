@@ -1,32 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a, a:visited, a:active, a:focus {
+  text-decoration: none;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
 .login {
-    display: flex;
-    flex-direction: column;
-    border-radius: 25px;
-    background: #E5E5E5;
-    padding: 2rem;
-    margin: 2rem 0;
-    min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 25px;
+  background: #E5E5E5;
+  padding: 2rem;
+  margin: 2rem 0;
+  min-height: 400px;
+}
+.login form {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.login form input {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex-grow: 1;
+  width: 100%;
+  height: 56px;
+  border-radius: 0.5rem;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  padding: 0.25rem 0.25rem 0.25rem 2rem;
+}
+.login form label {
+  margin-top: 2rem;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+.login form Button {
+  width: 10rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
 }
 
-.login > form {
-    margin-top: 1rem;
-}
-
-.login > form > .login-field,
-.login > form >  input {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    flex-grow: 1;
-    width: 100%;
-    height: 56px;
-    border-radius: 4px;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 24px;
-}
-
-.login > form > Button {
-    margin-top: 2rem;
-}
+/*# sourceMappingURL=index.scss.map */

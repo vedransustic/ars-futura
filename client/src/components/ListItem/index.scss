@@ -1,0 +1,13 @@
+.list-item {
+    width: 30rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem auto;
+
+    button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+}

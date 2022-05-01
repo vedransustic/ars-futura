@@ -1,0 +1,90 @@
+@import '../../index.scss';
+
+.register {
+    min-height: 900px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-radius: 25px;
+    background: $form-base-color;
+    padding: 2rem;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        flex-grow: 1;
+        padding-bottom: 1rem;
+        margin-top: 1rem;
+
+        input {
+            width: auto;
+            height: $form-height;
+            border-radius: $border-radius;
+            font-style: $form-font-style;
+            font-weight: $form-font-weight;
+            font-size: $form-font-size;
+            line-height: $form-line-height;
+            padding: $form-padding;
+        }
+
+        Button {
+            width: 20vh;
+            height: $form-height;
+            border-radius: $border-radius;
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        label {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.instructions {
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    background: $black-light;
+    color: $white;
+    padding: 0.25rem;
+    position: relative;
+    bottom: -10px;
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.hide {
+    display: none;
+}
+
+.valid {
+    color: $light-green;
+    margin-left: 0.25rem;
+}
+
+.invalid {
+    color: $dark-pink;
+    margin-left: 0.25rem;
+}
+
+.error-message {
+    background-color: $light-pink;
+    color: $dark-pink;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.sign-in{
+    text-align: right;
+}
+.link {
+    font-size: 1.25rem;
+    text-decoration: underline;
+}

@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Button, Title } from "../../components";
-import "./index.css";
+import "./index.scss";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   USERNAME_REGEX,
   PASSWORD_REGEX,
   EMAIL_REGEX,
-  REGISTER_URL,
+  REGISTER_TITLE,
 } from "../../const";
+import { APP_LOGIN_URL, REGISTER_URL } from "../../const/routes";
 import {
   faCheck,
   faInfoCircle,
@@ -74,26 +75,14 @@ const Register = () => {
       return;
     }
     try {
-      const response = await axios.post(
-        REGISTER_URL,
-        JSON.stringify({ username, password, email }),
-        {
+      await axios
+        .post(REGISTER_URL, JSON.stringify({ username, password, email }), {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
-        }
-      );
-
-      setSuccess(true);
+        })
+        .then(setSuccess(true));
     } catch (error) {
-      if (!error?.response) {
-        setErrorMessage("No Server Response");
-      } else if (error.response?.status === 408) {
-        setErrorMessage("Username Taken");
-      } else if (error.response?.status === 409) {
-        setErrorMessage("Email Already in Use");
-      } else {
-        setErrorMessage("Registration Failed");
-      }
+      setErrorMessage(error?.response.message);
       errRef.current.focus();
     }
   };
@@ -104,7 +93,7 @@ const Register = () => {
         <section>
           <h1>Success!</h1>
           <p>
-            <Link to="/login">Sign in</Link>
+            <Link to={APP_LOGIN_URL}>Sign in</Link>
           </p>
         </section>
       ) : (
@@ -116,18 +105,18 @@ const Register = () => {
           >
             {errorMessage}
           </p>
-          <Title text="REGISTER" />
+          <Title text={REGISTER_TITLE} />
           <form onSubmit={handleSubmit}>
             <>
               <label htmlFor="username" className="login-field">
                 Username:
                 <span className={validUsername ? "valid" : "hide"}>
-                  <FontAwesomeIcon icon={faCheck} />
+                  <FontAwesomeIcon icon={faCheck} size={"1x"} />
                 </span>
                 <span
                   className={validUsername || !username ? "hide" : "invalid"}
                 >
-                  <FontAwesomeIcon icon={faTimes} />
+                  <FontAwesomeIcon icon={faTimes} size={"1x"} />
                 </span>
               </label>
 
@@ -151,7 +140,7 @@ const Register = () => {
                     : "offscreen"
                 }
               >
-                <FontAwesomeIcon icon={faInfoCircle} />
+                <FontAwesomeIcon icon={faInfoCircle} size={"1x"} />
                 Username must be 4 to 24 characters long.
                 <br />
                 Must begin with letter.
@@ -165,12 +154,12 @@ const Register = () => {
               <label htmlFor="password" className="login-field">
                 Password:
                 <span className={validPassword ? "valid" : "hide"}>
-                  <FontAwesomeIcon icon={faCheck} />
+                  <FontAwesomeIcon icon={faCheck} size={"1x"} />
                 </span>
                 <span
                   className={validPassword || !password ? "hide" : "invalid"}
                 >
-                  <FontAwesomeIcon icon={faTimes} />
+                  <FontAwesomeIcon icon={faTimes} size={"1x"} />
                 </span>
               </label>
 
@@ -192,7 +181,7 @@ const Register = () => {
                     : "offscreen"
                 }
               >
-                <FontAwesomeIcon icon={faInfoCircle} />
+                <FontAwesomeIcon icon={faInfoCircle} size={"1x"} />
                 Password must be 8 to 24 characters long.
                 <br />
                 Must include uppercase, lowercase, number, special character.
@@ -216,7 +205,7 @@ const Register = () => {
                     validConformPassword && conformPassword ? "valid" : "hide"
                   }
                 >
-                  <FontAwesomeIcon icon={faCheck} />
+                  <FontAwesomeIcon icon={faCheck} size={"1x"} />
                 </span>
                 <span
                   className={
@@ -225,7 +214,7 @@ const Register = () => {
                       : "invalid"
                   }
                 >
-                  <FontAwesomeIcon icon={faTimes} />
+                  <FontAwesomeIcon icon={faTimes} size={"1x"} />
                 </span>
               </label>
 
@@ -249,7 +238,7 @@ const Register = () => {
                     : "offscreen"
                 }
               >
-                <FontAwesomeIcon icon={faInfoCircle} />
+                <FontAwesomeIcon icon={faInfoCircle} size={"1x"} />
                 Both Passwords must match.
               </p>
             </>
@@ -258,10 +247,10 @@ const Register = () => {
               <label htmlFor="email" className="login-field">
                 Email:
                 <span className={validEmail ? "valid" : "hide"}>
-                  <FontAwesomeIcon icon={faCheck} />
+                  <FontAwesomeIcon icon={faCheck} size={"1x"} />
                 </span>
                 <span className={validEmail || !email ? "hide" : "invalid"}>
-                  <FontAwesomeIcon icon={faTimes} />
+                  <FontAwesomeIcon icon={faTimes} size={"1x"} />
                 </span>
               </label>
 
@@ -284,7 +273,7 @@ const Register = () => {
                     : "offscreen"
                 }
               >
-                <FontAwesomeIcon icon={faInfoCircle} />
+                <FontAwesomeIcon icon={faInfoCircle} size={"1x"} />
                 Email consists of [username]@[domain name].[domain].
                 <br />
                 For example: jon_doe@google.com
@@ -303,7 +292,7 @@ const Register = () => {
           </form>
           <div className="sign-in">
             <p>Already have an account?</p>
-            <Link to="/login">
+            <Link to={APP_LOGIN_URL}>
               <div className="link">Sign in</div>
             </Link>
           </div>

@@ -1,0 +1,14 @@
+@import '../../index.scss';
+
+.error-container {
+  min-height: $min-container-height;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  p{
+    font-weight: bolder;
+    font-size: 1rem;
+  }
+}

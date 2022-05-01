@@ -1,8 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Button, Title } from "../../components";
-import "./index.css";
+import "./index.scss";
 import { Link, useNavigate } from "react-router-dom";
-import { LOGIN_URL, PASSWORD_REGEX, USERNAME_REGEX } from "../../const";
+import {
+  ERROR_TIMER,
+  INPUT_ERROR,
+  LOGIN_BUTTON,
+  LOGIN_TITLE,
+  PASSWORD_REGEX,
+  USERNAME_REGEX,
+} from "../../const";
+import { APP_LISTS_URL, APP_REGISTER_URL, LOGIN_URL } from "../../const/routes";
 import axios from "../../api/axios";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/actions/userActions";
@@ -10,8 +18,8 @@ import { login } from "../../redux/actions/userActions";
 const Login = () => {
   const usernameRef = useRef(null);
   const errRef = useRef(null);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -28,37 +36,29 @@ const Login = () => {
     const v1 = USERNAME_REGEX.test(username);
     const v2 = PASSWORD_REGEX.test(password);
     if (!v1 || !v2) {
-      setErrorMessage("Error: Invalid entry. Try again");
-      setTimeout(() => setErrorMessage(""), 3000);
+      setErrorMessage(INPUT_ERROR);
+      setTimeout(() => setErrorMessage(""), ERROR_TIMER);
       return;
     }
     try {
-      const response = await axios.post(
-        LOGIN_URL,
-        JSON.stringify({ username, password }),
-        {
+      await axios
+        .post(LOGIN_URL, JSON.stringify({ username, password }), {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
-        }
-      );
-
-      if (response) {
-        const { _id, username, todoLists } = response.data.user;
-
-        dispatch(login(_id, username, todoLists));
-
-        navigate("/lists");
-      }
-      setUsername("");
-      setPassword("");
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            const { _id, username, todoLists } = response.data.user;
+            dispatch(login(_id, username, todoLists));
+            navigate(APP_LISTS_URL);
+          }
+        });
     } catch (error) {
-      if (!error?.response) {
-        setErrorMessage("No Server Response");
-      } else {
-        setErrorMessage("Login Failed");
-      }
+      setErrorMessage("ERROR: " + error);
       errRef.current.focus();
     }
+    setUsername("");
+    setPassword("");
   };
 
   return (
@@ -70,12 +70,10 @@ const Login = () => {
       >
         {errorMessage}
       </p>
-      <Title text="LOGIN" />
+      <Title text={LOGIN_TITLE} />
       <form onSubmit={handleSubmit}>
         <>
-          <label htmlFor="username" className="login-field">
-            Username:
-          </label>
+          <label htmlFor="username">Username:</label>
           <input
             type="text"
             id="username"
@@ -86,9 +84,7 @@ const Login = () => {
           />
         </>
         <>
-          <label htmlFor="password" className="login-field">
-            Password:
-          </label>
+          <label htmlFor="password">Password:</label>
           <input
             type="password"
             id="password"
@@ -96,11 +92,11 @@ const Login = () => {
             required
           />
         </>
-        <Button text="Login" />
+        <Button text={LOGIN_BUTTON} />
       </form>
       <div className="sign-in">
         <p>Dont have account?</p>
-        <Link to="/register">
+        <Link to={APP_REGISTER_URL}>
           <div className="link">Sign up</div>
         </Link>
       </div>

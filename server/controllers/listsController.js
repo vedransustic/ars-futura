@@ -3,10 +3,11 @@ const { v4: uuidv4 } = require("uuid");
 
 const handleDeleteList = async (req, res) => {
   const { id, lid } = req.body;
+
   if (!id || !lid) {
     return res
       .status(400)
-      .json({ message: "Username or title are not to be found." });
+      .json({ message: "Username or list id are not to be found." });
   }
 
   const result = await User.updateOne(
@@ -15,7 +16,7 @@ const handleDeleteList = async (req, res) => {
   ).exec();
 
   if (!result) {
-    return res.sendStatus(401);
+    return res.status(500);
   }
 
   return res.status(200).json({
@@ -29,7 +30,7 @@ const handleRenameList = async (req, res) => {
   if (!id || !lid || !newTitle) {
     return res
       .status(400)
-      .json({ message: "Username, old and new titles are needed." });
+      .json({ message: "User, list and title are needed." });
   }
 
   const result = await User.findOneAndUpdate(
@@ -42,7 +43,7 @@ const handleRenameList = async (req, res) => {
   ).exec();
 
   if (!result) {
-    return res.sendStatus(401);
+    return res.status(500);
   }
 
   return res.status(200).json({
@@ -69,7 +70,7 @@ const handleChangeCompletedItem = async (req, res) => {
   ).exec();
 
   if (!result) {
-    return res.sendStatus(401);
+    return res.status(500);
   }
 
   return res.status(200).json({
@@ -106,7 +107,7 @@ const handleAddTodoItem = async (req, res) => {
   ).exec();
 
   if (!result) {
-    return res.sendStatus(401);
+    return res.status(500);
   }
 
   return res.status(200).json({
@@ -120,9 +121,7 @@ const handleCreateNewList = async (req, res) => {
   const list_id = uuidv4();
 
   if (!id || !todoTitle) {
-    return res
-      .status(400)
-      .json({ message: "id and default title are required." });
+    return res.status(400).json({ message: "User id and title are required." });
   }
 
   const result = await User.findOneAndUpdate(
@@ -144,7 +143,7 @@ const handleCreateNewList = async (req, res) => {
   ).exec();
 
   if (!result) {
-    return res.sendStatus(401);
+    return res.status(500);
   }
 
   return res.status(200).json({

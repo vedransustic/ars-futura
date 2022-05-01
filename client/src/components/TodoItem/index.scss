@@ -1,0 +1,22 @@
+@import '../../index.scss';
+
+.todo-item {
+    font-size: 1.25rem;
+    margin: 1rem 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    h2 {
+        padding-left: 24px;
+        font-size: $form-font-size;
+        font-weight: 600;
+        line-height: $form-line-height;
+        letter-spacing: 0;
+        text-align: left;
+    }
+
+    &:last-child {
+        padding-bottom: 12rem;
+    }
+}

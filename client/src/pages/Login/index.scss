@@ -1,0 +1,46 @@
+@import '../../index.scss';
+
+.login{
+    display: flex;
+    flex-direction: column;
+    border-radius: 25px;
+    background: $form-base-color;
+    padding: 2rem;
+    margin: 2rem 0;
+    min-height: 400px;
+
+    form {
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        input {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            flex-grow: 1;
+            width: 100%;
+            height: $form-height;
+            border-radius: $border-radius;
+            font-style: $form-font-style;
+            font-weight: $form-font-weight;
+            font-size: $form-font-size;
+            line-height: $form-line-height;
+            padding: $form-padding;
+        }
+
+        label {
+            margin-top: 2rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        Button {
+            width: 10rem;
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+    }
+}

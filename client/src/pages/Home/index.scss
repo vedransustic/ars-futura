@@ -1,0 +1,17 @@
+@import '../../index.scss';
+.home{
+    min-height: $min-container-height;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.title-button{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    align-items: center;
+}
+
+.user-lists {
+    margin-top: 4rem;
+}

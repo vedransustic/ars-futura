@@ -1,13 +1,14 @@
 .list-item {
-    width: 80%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: auto;
+  width: 30rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem auto;
+}
+.list-item button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
-.list-item > button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
+/*# sourceMappingURL=index.css.map */
