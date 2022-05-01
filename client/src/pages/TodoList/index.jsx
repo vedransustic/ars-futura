@@ -22,9 +22,9 @@ const TodoList = () => {
   const { listId } = useParams();
   const dispatch = useDispatch();
 
-  const id = useSelector((state) => state.allReducers.user.id);
-  const username = useSelector((state) => state.allReducers.user.username);
-  const lists = useSelector((state) => state.allReducers.user.todoLists);
+  const id = useSelector((state) => state.user.id);
+  const username = useSelector((state) => state.user.username);
+  const lists = useSelector((state) => state.user.todoLists);
   const listItemIndex = lists.findIndex((item) => item.lid === listId);
   const displayData = lists[listItemIndex];
 

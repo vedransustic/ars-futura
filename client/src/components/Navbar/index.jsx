@@ -4,7 +4,7 @@ import Logo from "../Logo";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const username = useSelector((state) => state.allReducers.user.username);
+  const username = useSelector((state) => state.user.username);
   return (
     <nav>
       <Logo />
