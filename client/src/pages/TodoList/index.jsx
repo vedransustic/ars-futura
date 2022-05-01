@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./index.css";
+import "./index.scss";
 import { Button, Title, TodoItem } from "../../components";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -81,21 +81,21 @@ const TodoList = () => {
         .then((response) => {
           if (response.status === 200) {
             dispatch(addTodoItem(displayData.lid, response.data.id, newTodo));
-            setNewTodo("");
           }
         });
+      setNewTodo("");
     } catch (error) {
       console.error("ERROR: ", error);
     }
   };
 
   return (
-    <>
-      <div className="content">
+    <div className="content">
+      <div className="top-side-page">
         <div className="top">
           <div className="title-container">
             {edit ? (
-              <input type="text" onChange={handleInput} />
+              <input type="text" value={title} onChange={handleInput} />
             ) : (
               <Title text={title} />
             )}
@@ -113,11 +113,13 @@ const TodoList = () => {
           </span>
           <input
             type="text"
-            value={newTodo}
             placeholder={TODO_ITEM_PLACEHOLDER}
+            value={newTodo}
             onChange={handleInputTodo}
           />
         </div>
+      </div>
+      <div>
         <div className="bottom">
           {displayData?.todoItems.map((todo, idx) => (
             <TodoItem
@@ -127,10 +129,12 @@ const TodoList = () => {
               item={todo}
             />
           ))}
+          <div className="share-button">
+            <Button text={TODO_LIST_SHARE} onClick={() => {}} />
+          </div>
         </div>
       </div>
-      <Button text={TODO_LIST_SHARE} onClick={() => {}} />
-    </>
+    </div>
   );
 };
 

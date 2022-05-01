@@ -1,0 +1,16 @@
+@import '../../index.scss';
+
+nav {
+    height: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $black;
+    padding: 0 2rem;
+    border-radius: 0 20px 0 20px ;
+    box-shadow: 0 .25rem .25rem 0 $black-light;
+
+    h2{
+        color: $white;
+    }
+}

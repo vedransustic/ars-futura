@@ -24,7 +24,8 @@ export const TODO_LIST_SHARE = "Share Todo List";
 export const TODO_ITEM_PLACEHOLDER = "Add a to-do...";
 
 //ERROR PAGE
-export const ERROR_TEXT = "ERROR 404. Page not found...";
+export const ERROR_TITLE = "ERROR 404";
+export const ERROR_PARAGRAPH = "Page not found...";
 
 //REDUX ACTION TYPES
 export const LOGIN = "LOGIN";

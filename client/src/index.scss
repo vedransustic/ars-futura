@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+$form-base-color: #E5E5E5;
+$black: #000C;
+$black-light: #0000004D;
+$white: #fff;
+$dark-gray: #777777;
+$light-gray: rgba(0, 0, 0, 0.05);
+$light-green: #1FD655;
+$light-pink: #FFE6EE;
+$dark-pink: #8A0030;
+$yellow: #FFD976;
+$gold: #F8BE26;
+$form-font-size: 1.5rem;
+$form-padding: 0.25rem 0.25rem 0.25rem 2rem;
+$form-line-height: 1.5rem;
+$form-height: 56px;
+$border-radius: .5rem;
+$form-font-style: normal;
+$form-font-weight: 400;
+$min-container-height: 60vh;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a, a:visited, a:active, a:focus {
+  text-decoration: none;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

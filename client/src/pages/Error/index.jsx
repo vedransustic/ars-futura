@@ -1,9 +1,15 @@
 import React from "react";
 import { Title } from "../../components";
-import { ERROR_TEXT } from "../../const";
+import { ERROR_TITLE, ERROR_PARAGRAPH } from "../../const";
+import "./index.scss";
 
 const Error = () => {
-  return <Title text={ERROR_TEXT} />;
+  return (
+    <div className="error-container">
+      <Title text={ERROR_TITLE} />
+      <p>{ERROR_PARAGRAPH}</p>
+    </div>
+  );
 };
 
 export default Error;

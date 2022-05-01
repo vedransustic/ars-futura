@@ -1,90 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a, a:visited, a:active, a:focus {
+  text-decoration: none;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
 .register {
-    min-height: 900px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    border-radius: 25px;
-    background: #E5E5E5;
-    padding: 2rem;
+  min-height: 900px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-radius: 25px;
+  background: #E5E5E5;
+  padding: 2rem;
 }
-
-.register > form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    flex-grow: 1;
-    padding-bottom: 1rem;
-    margin-top: 1rem;
+.register form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex-grow: 1;
+  padding-bottom: 1rem;
+  margin-top: 1rem;
 }
-
-.register > form > input,
-.register > form > Button {
-    width: auto;
-    height: 56px;
-    border-radius: .5rem;
-    padding: 0.25rem;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 32px;
-    margin-top: 1rem;
+.register form input {
+  width: auto;
+  height: 56px;
+  border-radius: 0.5rem;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  padding: 0.25rem 0.25rem 0.25rem 2rem;
 }
-.register > form > Button{
-    justify-content: center;
-    margin-top: 1rem;
+.register form Button {
+  width: 20vh;
+  height: 56px;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
 }
-
-.register > form > label {
-    font-weight: 700;
-    font-size: 1.5rem;
+.register form label {
+  font-weight: 700;
+  font-size: 1.5rem;
 }
 
 .instructions {
-    font-size: 1rem;
-    border-radius: 0.5rem;
-    background: #000;
-    color: #fff;
-    padding: 0.25rem;
-    position: relative;
-    bottom: -10px;
-}
-
-.register > form > .instructions > svg {
-    margin-right: 0.25rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  background: rgba(0, 0, 0, 0.3019607843);
+  color: #fff;
+  padding: 0.25rem;
+  position: relative;
+  bottom: -10px;
 }
 
 .offscreen {
-    position: absolute;
-    left: -9999px;
+  position: absolute;
+  left: -9999px;
 }
 
 .hide {
-    display: none;
+  display: none;
 }
 
 .valid {
-    color: limegreen;
-    margin-left: 0.25rem;
+  color: #1FD655;
+  margin-left: 0.25rem;
 }
 
 .invalid {
-    color: red;
-    margin-left: 0.25rem;
+  color: #8A0030;
+  margin-left: 0.25rem;
 }
 
 .error-message {
-    background-color: lightpink;
-    color: firebrick;
-    font-weight: bold;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
+  background-color: #FFE6EE;
+  color: #8A0030;
+  font-weight: bold;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
-.sign-in{
-    text-align: right;
+.sign-in {
+  text-align: right;
 }
+
 .link {
-    font-size: 1.25rem;
-    text-decoration: underline;
-
+  font-size: 1.25rem;
+  text-decoration: underline;
 }
+
+/*# sourceMappingURL=index.css.map */

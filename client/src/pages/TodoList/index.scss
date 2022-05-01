@@ -1,0 +1,114 @@
+@import '../../index.scss';
+
+.content{
+
+    min-height: $min-container-height;
+    position: relative;
+
+    .top-side-page {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin: auto;
+        min-height: 18vh;
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 10vh;
+
+            .title-container {
+                display: flex;
+                justify-content: flex-start;
+                padding: 25px 0;
+
+                h1, input {
+                    width: 20rem;
+                    background-color: transparent;
+                    font-style: normal;
+                    font-weight: 900;
+                    font-size: 32px;
+                    line-height: 39px;
+                }
+
+                h1 {
+                    margin: 1px 0;
+                }
+
+                input {
+                    border: 1px solid $light-gray;
+                }
+
+                button {
+                    color: $dark-gray;
+                    display: flex;
+                    align-items: center;
+                    background: transparent;
+                    border: none;
+                    cursor: pointer;
+                    margin-left: 1rem;
+
+                    span {
+                        flex: none;
+                        order: 1;
+                        flex-grow: 0;
+                        margin: 0 8px;
+                        font-size: 14px;
+                        font-weight: 700;
+                        line-height: 17px;
+                        text-align: left;
+
+                    }
+                }
+            }
+        }
+
+        .middle {
+            width: 640px;
+            height: 56px;
+            background: $light-gray;
+            display: flex;
+            margin: auto;
+            align-items: center;
+            border-radius: 4px;
+
+            .plus {
+                flex: 1;
+                height: inherit;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: $black-light;
+                cursor: pointer;
+            }
+
+            input {
+                flex: 10;
+                width: auto;
+                height: inherit;
+                background-color: transparent;
+                border: none;
+
+                font-size: 21px;
+                font-weight: 400;
+                line-height: 25px;
+                letter-spacing: 0;
+
+                padding-left: 2rem;
+                text-align: left;
+                color: $black-light;
+            }
+        }
+    }
+
+    .bottom {
+
+        .share-button{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin: 2rem 0;
+        }
+    }
+}

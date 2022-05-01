@@ -1,11 +1,32 @@
-h1{
-    font-size: 32px;
-    font-weight: 900;
-    line-height: 39px;
-    letter-spacing: 0;
-    text-align: left;
-    color: black;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a, a:visited, a:active, a:focus {
+  text-decoration: none;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 39px;
+  letter-spacing: 0;
+  text-align: left;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+/*# sourceMappingURL=index.scss.map */

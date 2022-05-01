@@ -1,10 +1,10 @@
 import React from "react";
-import "./index.css";
+import "./index.scss";
 import Logo from "../Logo";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const username = useSelector((state) => state.username);
+  const username = useSelector((state) => state.allReducers.user.username);
   return (
     <nav>
       <Logo />

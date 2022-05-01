@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Button, Title } from "../../components";
-import "./index.css";
+import "./index.scss";
 import { Link, useNavigate } from "react-router-dom";
 import {
   ERROR_TIMER,
@@ -73,9 +73,7 @@ const Login = () => {
       <Title text={LOGIN_TITLE} />
       <form onSubmit={handleSubmit}>
         <>
-          <label htmlFor="username" className="login-field">
-            Username:
-          </label>
+          <label htmlFor="username">Username:</label>
           <input
             type="text"
             id="username"
@@ -86,9 +84,7 @@ const Login = () => {
           />
         </>
         <>
-          <label htmlFor="password" className="login-field">
-            Password:
-          </label>
+          <label htmlFor="password">Password:</label>
           <input
             type="password"
             id="password"

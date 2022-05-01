@@ -1,5 +1,5 @@
 import React from "react";
-import "./index.css";
+import "./index.scss";
 import { useDispatch } from "react-redux";
 import { changeItemCompleted } from "../../redux/actions/userActions";
 import axios from "../../api/axios";

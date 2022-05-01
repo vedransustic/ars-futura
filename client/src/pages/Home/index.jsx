@@ -1,5 +1,5 @@
 import React from "react";
-import "./index.css";
+import "./index.scss";
 import { Button, ListItem, Title } from "../../components";
 import axios from "../../api/axios";
 import { DEFAULT_TITLE, HOME_TITLE, NEW_LIST_BUTTON } from "../../const";
