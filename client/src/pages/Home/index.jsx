@@ -9,8 +9,8 @@ import { addNewList, deleteList } from "../../redux/actions/userActions";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const id = useSelector((state) => state.allReducers.user.id);
-  const todoLists = useSelector((state) => state.allReducers.user.todoLists);
+  const id = useSelector((state) => state.user.id);
+  const todoLists = useSelector((state) => state.user.todoLists);
 
   const handleNewList = async () => {
     try {
