@@ -7,14 +7,13 @@ const todoItemSchema = new Schema(
       type: String,
       required: true,
       unique: true,
+      sparse: true,
     },
     title: {
       type: String,
-      required: true,
     },
     completed: {
       type: Boolean,
-      required: true,
       default: false,
     },
   },
@@ -27,10 +26,10 @@ const todoListSchema = new Schema(
       type: String,
       required: true,
       unique: true,
+      sparse: true,
     },
     todoTitle: {
       type: String,
-      required: true,
       default: "untitled",
     },
     todoItems: [todoItemSchema],
@@ -51,12 +50,9 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  todoLists: {
-    type: [todoListSchema],
-    required: true,
-  },
+  todoLists: [todoListSchema],
 });
 
-//refreshToken ?
+const User = mongoose.model("User", userSchema);
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = User;

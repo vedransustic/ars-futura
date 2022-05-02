@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import "./index.scss";
 
-const Index = ({ text }) => {
+const Title = ({ text }) => {
   return <h1>{text}</h1>;
 };
 
-export default Index;
+export const MemoTitle = memo(Title);

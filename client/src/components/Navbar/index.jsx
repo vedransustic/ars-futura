@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 import "./index.scss";
-import Logo from "../Logo";
+import { Logo } from "..";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
@@ -13,4 +13,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export const MemoNavbar = memo(Navbar);

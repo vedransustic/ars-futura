@@ -130,7 +130,14 @@ const TodoList = () => {
             />
           ))}
           <div className="share-button">
-            <Button text={TODO_LIST_SHARE} onClick={() => {}} />
+            <Button
+              text={TODO_LIST_SHARE}
+              onClick={() => {
+                console.log(
+                  "Unfortunately I don't understand what is needed. JWT and rules, ... or create and send html trough email?"
+                );
+              }}
+            />
           </div>
         </div>
       </div>

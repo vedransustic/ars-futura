@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import "./index.scss";
 
 const Footer = () => {
@@ -10,4 +10,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export const MemoFooter = memo(Footer);
