@@ -1,10 +1,8 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
-const { LOGIN_ROUTE } = require("../const/routes");
 
 const handleNewUser = async (req, res) => {
   const { username, password, email } = req.body;
-
   if (!username || !password || !email) {
     return res
       .status(400)
@@ -13,32 +11,30 @@ const handleNewUser = async (req, res) => {
 
   const duplicateUser = await User.findOne({ username }).exec();
   const duplicateEmail = await User.findOne({ email }).exec();
-
   if (duplicateUser || duplicateEmail) {
     return res
       .status(409)
-      .json({ message: "Username or Password are already in use" });
+      .json({ message: "Username or Email are already in use" });
   }
 
+  const hashedPassword = await bcrypt.hash(password, 8);
   try {
-    const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(password, salt);
-    const result = await User.create({
+    const newUser = new User({
       username,
       password: hashedPassword,
       email,
-      todoLists: [],
     });
 
-    if (!result) {
+    const response = await newUser.save();
+
+    if (!response) {
       res
         .status(500)
         .json({ message: "Error while creating user. Check mongoDB." });
     }
-
-    res.sendStatus(201).redirect(LOGIN_ROUTE);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(200).json({ message: "Created new user." });
+  } catch (e) {
+    console.error("ERROR: ", e);
   }
 };
 

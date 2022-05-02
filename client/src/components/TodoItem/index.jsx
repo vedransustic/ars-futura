@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import "./index.scss";
 import { useDispatch } from "react-redux";
 import { changeItemCompleted } from "../../redux/actions/userActions";
@@ -49,4 +49,4 @@ const TodoItem = ({ username, lid, item }) => {
   );
 };
 
-export default TodoItem;
+export const MemoTodoItem = memo(TodoItem);

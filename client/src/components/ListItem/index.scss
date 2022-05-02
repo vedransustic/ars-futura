@@ -1,9 +1,15 @@
+@import '../../index.scss';
+
 .list-item {
     width: 30rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 2rem auto;
+
+    a, :visited, :active, :focus{
+        color: $black;
+    }
 
     button {
         background-color: transparent;

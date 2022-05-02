@@ -1,6 +1,5 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const handleLogin = async (req, res) => {
@@ -21,7 +20,6 @@ const handleLogin = async (req, res) => {
   const match = await bcrypt.compare(password, user.password);
 
   if (match) {
-    //const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
     return res.status(200).json({ user });
   } else {
     return res.status(401).json({ message: "Wrong password. Try again." });
